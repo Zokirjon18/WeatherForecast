@@ -1,0 +1,87 @@
+﻿{
+    "coord": {
+        "lon": 69.2163,
+        "lat": 41.2646
+    },
+    "weather": [
+        {
+            "id": 800,
+            "main": "Clear",
+            "description": "clear sky",
+            "icon": "01d"
+        }
+    ],
+    "base": "stations",
+    "main": {
+        "temp": 35.97,
+        "feels_like": 34.01,
+        "temp_min": 35.97,
+        "temp_max": 35.97,
+        "pressure": 996,
+        "humidity": 19,
+        "sea_level": 996,
+        "grnd_level": 949
+    },
+    "visibility": 10000,
+    "wind": {
+        "speed": 3.09,
+        "deg": 230
+    },
+    "clouds": { "all": 0 },
+    "dt": 1753338698,
+    "sys": {
+        "type": 1,
+        "id": 9016,
+        "country": "UZ",
+        "sunrise": 1753315833,
+        "sunset": 1753368504
+    },
+    "timezone": 18000,
+    "id": 1512569,
+    "name": "Tashkent",
+    "cod": 200
+}
+{
+    "coord": {
+        "lon": 69.2163,
+        "lat": 41.2646
+    },
+    "weather": [
+        {
+            "id": 800,
+            "main": "Clear",
+            "description": "clear sky",
+            "icon": "01d"
+        }
+    ],
+    "base": "stations",
+    "main": {
+        "temp": 37.01,
+        "feels_like": 34.64,
+        "temp_min": 37.01,
+        "temp_max": 37.01,
+        "pressure": 1001,
+        "humidity": 15,
+        "sea_level": 1001,
+        "grnd_level": 953
+    },
+    "visibility": 10000,
+    "wind": {
+        "speed": 7.32,
+        "deg": 285,
+        "gust": 8.94
+    },
+    "clouds": {
+        "all": 4
+    },
+    "dt": 1753869416,
+    "sys": {
+        "country": "UZ",
+        "sunrise": 1753834575,
+        "sunset": 1753886563
+    },
+    "timezone": 18000,
+    "id": 1512569,
+    "name": "Tashkent",
+    "cod": 200
+}
