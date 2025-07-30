@@ -26,7 +26,7 @@ namespace WeatherForecastApp.BotHandler.WeatherForecastBot.UIService
 
         public async Task StartAsync(CancellationToken cancellationToken = default)
         {
-            ITelegramBotClient client = new TelegramBotClient("7760588415:AAGnGtWsikGYFVNIdoY0m5g5Ed5PX_W9j2E");
+            ITelegramBotClient client = new TelegramBotClient("YOUR_TELEGRAM_BOT_TOKEN");
             _cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
 
             client.StartReceiving(
