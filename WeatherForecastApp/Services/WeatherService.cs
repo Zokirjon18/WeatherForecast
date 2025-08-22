@@ -5,7 +5,7 @@ namespace WeatherForecastApp.Services;
 
 public class WeatherService
 {
-    private readonly string apiKey = "2c6e6a70646d1deadd30125b4ec24eb1";
+    private readonly string apiKey = "YOUR_API_KEY";
     private HttpClient httpClient = new HttpClient();
 
     public async Task<(bool isSuccessfull, double lat, double lon)> GetCoordinates(
