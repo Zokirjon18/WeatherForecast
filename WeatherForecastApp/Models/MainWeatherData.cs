@@ -23,10 +23,10 @@ namespace WeatherForecastApp.Models
         [JsonProperty("humidity")]
         public int Humidity { get; set; }
 
-        [JsonProperty("sea_level")]
-        public int? SeaLevel { get; set; }
+        //[JsonProperty("sea_level")]
+        //public int? SeaLevel { get; set; }
 
-        [JsonProperty("grnd_level")]
-        public int? GroundLevel { get; set; }
+        //[JsonProperty("grnd_level")]
+        //public int? GroundLevel { get; set; }
     }
 }

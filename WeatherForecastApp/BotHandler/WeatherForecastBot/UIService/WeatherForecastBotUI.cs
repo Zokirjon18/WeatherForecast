@@ -162,6 +162,17 @@ namespace WeatherForecastApp.BotHandler.WeatherForecastBot.UIService
                     return;
                 }
 
+                WeatherResponse weeklyWeather = await weatherService.GetWeeklyWeather(coordinateResult.lat, coordinateResult.lon);
+
+                if (weather == null)
+                {
+                    await client.SendMessage(
+                        chatId,
+                        "❌ Weather service is currently unavailable. Please try again later.",
+                        cancellationToken: cancellationToken);
+                    return;
+                }
+
                 // Format and send weather information
                 if (command.ToLower() == "/today")
                 {
@@ -169,7 +180,7 @@ namespace WeatherForecastApp.BotHandler.WeatherForecastBot.UIService
                 }
                 else if (command.ToLower() == "/week")
                 {
-                    await SendWeeklyWeatherAsync(client, chatId, weather, user, cancellationToken);
+                    await SendWeeklyWeatherAsync(client, chatId, weeklyWeather, user, cancellationToken);
                 }
             }
             catch (Exception ex)
@@ -220,12 +231,33 @@ namespace WeatherForecastApp.BotHandler.WeatherForecastBot.UIService
         }
 
         // NEW METHOD: Placeholder for weekly weather (you can implement this later)
-        private async Task SendWeeklyWeatherAsync(ITelegramBotClient client, long chatId, WeatherForecast weather, Foydalanuvchi user, CancellationToken cancellationToken)
+        private async Task SendWeeklyWeatherAsync(ITelegramBotClient client, long chatId, WeatherResponse weeklyWeather, Foydalanuvchi user, CancellationToken cancellationToken)
         {
-            await client.SendMessage(
-                chatId,
-                "📅 Weekly forecast feature is coming soon! Use /today for current weather.",
-                cancellationToken: cancellationToken);
+            try
+            {
+                List<WeatherForecast> dailyForecasts = weeklyWeather.List
+                .Where(f => DateTimeOffset.FromUnixTimeSeconds(f.Dt).Hour == 12)
+                .ToList();
+
+                var weeklyWeatherInfo = string.Join("\n", dailyForecasts.Select(weather =>
+                        $"📅 Date: {DateTimeOffset.FromUnixTimeSeconds(weather.Dt).DateTime:MMM dd, yyyy HH:mm}\n" +
+                        $"🌡️ Temperature: {weather.Main.Temp}°C\n" +
+                        $"🌡️ Min/Max: {weather.Main.TempMin}°C / {weather.Main.TempMax}°C\n" +
+                        $"☁️ Condition: {weather.Description}\n"));
+
+                await client.SendMessage(
+                    chatId: chatId,
+                    weeklyWeatherInfo,
+                    parseMode: ParseMode.Markdown,
+                    cancellationToken: cancellationToken
+                    );
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+            ;
         }
 
         public async Task StartCommandAsync(ITelegramBotClient client, long chatId, string text, Session session, CancellationToken cancellationToken)
@@ -298,7 +330,7 @@ namespace WeatherForecastApp.BotHandler.WeatherForecastBot.UIService
 
                     if (session.Mode == Mode.Login)
                     {
-                        success = userService.Login(chatId, session.Country, session.City);
+                        success = userService.Update(chatId, session.Country, session.City);
                     }
                     else if (session.Mode == Mode.Register)
                     {

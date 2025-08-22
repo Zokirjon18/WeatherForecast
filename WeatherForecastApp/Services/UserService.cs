@@ -43,7 +43,7 @@ public class UserService
         return true;
     }
 
-    public bool Login(long chatId, string countryCode, string city)
+    public bool Update(long chatId, string countryCode, string city)
     {
         List<Foydalanuvchi> users = DeserializeUsers();
 
@@ -60,6 +60,11 @@ public class UserService
         {
             throw new Exception("City must be entered!");
         }
+
+        user.CountryCode = countryCode;
+        user.City = city;
+
+        FileHelper.WriteToFile(PathHolder.Users, users);
 
         return true;
     }
